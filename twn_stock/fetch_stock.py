@@ -69,7 +69,7 @@ class StockSource:
         if month_data > 12:
             raise ValueError('Month must be between 1 ~ 12')
         else:
-            self._month = ''.join('{:02X}'.format(x) for x in int.to_bytes(month_data, length=1, byteorder='big'))
+            self._month = ''.join('{:02}'.format(x) for x in int.to_bytes(month_data, length=1, byteorder='big'))
 
     @property
     def day(self):
@@ -80,7 +80,7 @@ class StockSource:
         if day_data > 31:
             raise ValueError('Day must be between 1 ~ 31')
         else:
-            self._day = ''.join('{:02X}'.format(x) for x in int.to_bytes(day_data, length=1, byteorder='big'))
+            self._day = ''.join('{:02}'.format(x) for x in int.to_bytes(day_data, length=1, byteorder='big'))
 
 def dataparser():
     report_url = urllib.parse.urljoin(TWSE_BASE_URL, 'exchangeReport/STOCK_DAY')
