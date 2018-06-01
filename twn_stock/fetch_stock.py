@@ -39,11 +39,10 @@ class StockSource:
             self.year = int(date_list[0])
             self.month = int(date_list[1])
             self.day = int(date_list[2])
-            print(self._year + self._month + self._day)
-            exit()
+            self._date = self._year + self._month + self._day
+            print(self._date)
         if error is True:
             raise ValueError('Date not recognize')
-        exit()
 
     @property
     def year(self):
@@ -82,6 +81,7 @@ class StockSource:
         else:
             self._day = ''.join('{:02}'.format(x) for x in int.to_bytes(day_data, length=1, byteorder='big'))
 
+
 def dataparser():
     report_url = urllib.parse.urljoin(TWSE_BASE_URL, 'exchangeReport/STOCK_DAY')
     year = 2018
@@ -98,9 +98,3 @@ if __name__ == '__main__':
     string_input = input('please input:')
     source = StockSource()
     source.date = string_input
-    source.year = 83
-    print(source.year)
-    source.year = 2008
-    print(source.year)
-    #stock_id
-    #date
