@@ -4,6 +4,8 @@ import requests
 
 TWSE_BASE_URL = 'http://www.twse.com.tw/'
 TPEX_BASE_URL = 'http://www.tpex.org.tw/'
+# Sample : Catch a month
+# http://www.twse.com.tw/exchangeReport/STOCK_DAY?date=20180501&stockNo=1101
 
 
 class StockSource:
@@ -15,6 +17,10 @@ class StockSource:
         self._month = ''
         self._day = ''
         self._date = '19920104'
+        self.security_code = '1101'
+
+    def get_security_code(self, code_data: str):
+        self.security_code = code_data
 
     @property
     def date(self):
@@ -23,6 +29,7 @@ class StockSource:
     @date.setter
     def date(self,  date_data: str):
         split_symbol = ''
+        error = True
         if len(date_data.split('/')) is 3:
             split_symbol = '/'
             error = False
@@ -35,12 +42,11 @@ class StockSource:
 
         if error is False:
             date_list = date_data.split(split_symbol)
-            print(date_list)
             self.year = int(date_list[0])
             self.month = int(date_list[1])
             self.day = int(date_list[2])
             self._date = self._year + self._month + self._day
-            print(self._date)
+
         if error is True:
             raise ValueError('Date not recognize')
 
@@ -91,10 +97,12 @@ def dataparser():
     r = requests.get(report_url, params=params)
     print(r.url)
     # print(r.content)
+    exit()
 
 
 if __name__ == '__main__':
     # dataparser()
-    string_input = input('please input:')
+    string_input = input('please input(yyyy/mm/dd):')
     source = StockSource()
     source.date = string_input
+    print(source.date)
