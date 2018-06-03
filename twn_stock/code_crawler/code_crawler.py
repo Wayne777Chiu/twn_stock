@@ -4,6 +4,8 @@ from collections import namedtuple
 from lxml import etree
 import csv
 
+# Securities Code Reference:
+# http://www.twse.com.tw/zh/page/products/stock-code2.html
 # TWSE
 TWSE_REQ_URL = 'http://isin.twse.com.tw/isin/C_public.jsp?strMode=2'
 # TPEX
